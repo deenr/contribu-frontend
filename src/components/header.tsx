@@ -49,7 +49,7 @@ export function Header() {
           className={`
           py-2.5 flex flex-row justify-between items-center mx-auto max-w-7xl gap-6 sm:gap-8 md:gap-12 
           transition-all duration-300 ease-in-out
-          ${isSticky ? 'pl-5 p-2.5 bg-background/85 rounded-full backdrop-blur-lg border shadow-sm' : ''}
+          ${isSticky ? 'p-2.5 bg-background/85 rounded-full backdrop-blur-lg border shadow-sm' : ''}
         `}
         >
           <Contribu className="text-xl text-primary min-h-5 h-5 min-w-28 w-28" />
