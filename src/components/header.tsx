@@ -10,6 +10,9 @@ export function Header() {
       setIsSticky(window.scrollY > 0);
     };
 
+    if (window.scrollY) {
+      setIsSticky(true);
+    }
     window.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -28,9 +31,9 @@ export function Header() {
     >
       <div
         className={`
-          p-2.5 pl-5 flex flex-row justify-between items-center mx-auto max-w-7xl gap-6 sm:gap-8 md:gap-12 
+          p-2.5 flex flex-row justify-between items-center mx-auto max-w-7xl gap-6 sm:gap-8 md:gap-12 
           transition-all duration-300 ease-in-out
-          ${isSticky ? 'bg-background/85 rounded-full backdrop-blur-lg border shadow-sm' : ''}
+          ${isSticky ? 'pl-5 bg-background/85 rounded-full backdrop-blur-lg border shadow-sm' : ''}
         `}
       >
         <Contribu className="text-xl text-primary h-5 w-fit" />

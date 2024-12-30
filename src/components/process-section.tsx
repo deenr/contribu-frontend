@@ -1,4 +1,5 @@
 import { Combine, Link, Lock, Share2 } from 'lucide-react';
+import { motion } from 'motion/react';
 import { ProcessStep } from './process-step';
 
 const steps = [
@@ -17,19 +18,51 @@ const steps = [
 ];
 
 export function ProcessSection() {
+  const headerAnimation = {
+    initial: { opacity: 0, x: -30 },
+    whileInView: { opacity: 1, x: 0 },
+    transition: {
+      type: 'spring',
+      damping: 30,
+      stiffness: 400,
+      delay: 0.3,
+      mass: 1
+    }
+  };
+
+  const stepAnimation = {
+    initial: { opacity: 0, x: -50 },
+    whileInView: { opacity: 1, x: 0 },
+    transition: {
+      type: 'spring',
+      damping: 25,
+      stiffness: 127,
+      delay: 0.1,
+      mass: 1
+    }
+  };
+
   return (
-    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12">
+    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12 dark:bg-muted/30 bg-muted">
       <div className="flex flex-col gap-6 sm:gap-8 md:gap-12 max-w-7xl mx-auto">
         <div className="flex flex-col gap-2">
-          <h2 className="font-medium text-xs sm:text-sm text-muted-foreground">Process</h2>
+          <motion.h2 {...headerAnimation} className="font-medium text-xs sm:text-sm text-muted-foreground">
+            Process
+          </motion.h2>
           <div className="flex flex-col md:flex-row gap-4">
-            <p className="flex-1 text-2xl sm:text-3xl font-semibold">A Secure Way to Keep Your Contributions</p>
-            <p className="flex-1 text-sm sm:text-base font-normal text-muted-foreground">Contribu enables you to transfer commit logs from private repositories while ensuring privacy and control.</p>
+            <motion.p {...headerAnimation} className="flex-1 text-2xl sm:text-3xl font-semibold">
+              A Secure Way to Keep Your Contributions
+            </motion.p>
+            <motion.p {...headerAnimation} className="flex-1 text-sm sm:text-base font-normal text-muted-foreground">
+              Contribu enables you to transfer commit logs from private repositories while ensuring privacy and control.
+            </motion.p>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {steps.map((step, index) => (
-            <ProcessStep key={index} number={index + 1} {...step} />
+            <motion.div key={index} {...stepAnimation}>
+              <ProcessStep number={index + 1} {...step} />
+            </motion.div>
           ))}
         </div>
       </div>

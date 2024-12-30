@@ -9,8 +9,8 @@ function App() {
     <>
       <Header />
       <HeroSection />
-      <ProcessSection />
       <BenefitsSection />
+      <ProcessSection />
       <Footer />
     </>
   );

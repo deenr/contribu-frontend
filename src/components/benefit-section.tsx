@@ -1,4 +1,5 @@
 import { Frown, Smile } from 'lucide-react';
+import { motion } from 'motion/react';
 import { BenefitItem } from './benefit-item';
 
 const benefits = [
@@ -21,34 +22,61 @@ const benefits = [
 ];
 
 export function BenefitsSection() {
+  const sectionAnimation = {
+    initial: { opacity: 0 },
+    whileInView: { opacity: 1 },
+    transition: {
+      type: 'spring',
+      time: 0.3,
+      bounce: 0.2,
+      delay: 0
+    }
+  };
+  const sectionAnimation2 = {
+    initial: { scale: 0.8 },
+    whileInView: { scale: 1 },
+    transition: {
+      type: 'spring',
+      stiffness: 582,
+      damping: 40,
+      mass: 1
+    }
+  };
+
   return (
-    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12">
-      {/* <div className="flex flex-col gap-6 sm:gap-8 md:gap-12 max-w-7xl mx-auto"> */}
-      <div className="flex flex-col items-center mx-auto max-w-7xl gap-6 sm:gap-8 md:gap-12">
-        <div className="flex flex-col items-center gap-2">
-          <h2 className="font-medium text-xs sm:text-sm text-muted-foreground">Benefits</h2>
-          <p className="flex-1 text-2xl sm:text-3xl font-semibold text-center">
-            Why Developers Trust Contribu: <br />
-            <span className="text-muted-foreground">Built for Transparency, Privacy, and Accessibility.</span>
-          </p>
-        </div>
-        <div className="w-full hidden md:flex flex-row relative gap-12 px-8">
-          <div className="flex-1 flex flex-row gap-2 items-center">
-            <Smile className="text-primary w-4 h-4 sm:w-6 sm:h-6" />
-            <p className="text-sm sm:text-md font-semibold text-primary">With Contribu.me</p>
+    <motion.div {...sectionAnimation2}>
+      <motion.section {...sectionAnimation} className="py-16 sm:py-20 md:py-24 pt-24 sm:pt-28 md:pt-32 px-4 sm:px-6 md:px-8 lg:px-12">
+        {/* <div className="flex flex-col gap-6 sm:gap-8 md:gap-12 max-w-7xl mx-auto"> */}
+        <div className="relative mx-auto max-w-7xl flex flex-col gap-8 md:gap-16">
+          <div className="md:sticky pb-12 md:pb-80 top-[160px] flex flex-col items-center gap-2">
+            <h2 className="font-medium text-xs sm:text-sm text-muted-foreground">Benefits</h2>
+            <p className="flex-1 text-2xl sm:text-3xl font-semibold text-center">
+              Why Developers Trust Contribu: <br />
+              <span className="text-muted-foreground">Built for Transparency, Privacy, and Accessibility.</span>
+            </p>
           </div>
-          <div></div>
-          <div className="flex-1 flex flex-row gap-2 items-center">
-            <Frown className="text-destructive w-4 h-4 sm:w-6 sm:h-6" />
-            <p className="text-sm sm:text-md font-semibold text-destructive">Without</p>
-          </div>
-        </div>
-        <div className="flex flex-col gap-8 md:gap-4 w-full">
           {benefits.map((benefit, index) => (
-            <BenefitItem key={index} {...benefit} />
+            <div key={index} className="md:sticky" style={{ top: `${360 + index * 20}px` }}>
+              {index === 0 ? (
+                <div className="absolute top-[-48px] w-full hidden md:flex flex-row gap-12 px-8 pb-6">
+                  <div className="flex-1 flex flex-row gap-2 items-center">
+                    <Smile className="text-primary w-4 h-4 sm:w-6 sm:h-6" />
+                    <p className="text-sm sm:text-md font-semibold text-primary">With Contribu.me</p>
+                  </div>
+                  <div></div>
+                  <div className="flex-1 flex flex-row gap-2 items-center">
+                    <Frown className="text-destructive w-4 h-4 sm:w-6 sm:h-6" />
+                    <p className="text-sm sm:text-md font-semibold text-destructive">Without</p>
+                  </div>
+                </div>
+              ) : (
+                <></>
+              )}
+              <BenefitItem {...benefit} />
+            </div>
           ))}
         </div>
-      </div>
-    </section>
+      </motion.section>
+    </motion.div>
   );
 }
