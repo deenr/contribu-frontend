@@ -31,6 +31,10 @@ export function HeroSection() {
           <motion.div ref={badgeRef} initial={{ opacity: 0, y: 20 }} animate={isBadgeInView ? { opacity: 1, y: 0 } : {}} transition={{ ...springTransition, delay: 0.1 }}>
             <Badge variant="outline" className="flex flex-row pl-1 py-1 gap-2 font-medium text-xs sm:text-sm text-muted-foreground bg-background">
               <Badge variant="outline" className="font-medium text-xs sm:text-sm text-muted-foreground">
+                <div className="relative w-1.5 h-1.5 mr-1.5">
+                  <div className="absolute w-full h-full bg-primary rounded-full animate-ping"></div>
+                  <div className="absolute w-full h-full bg-primary rounded-full"></div>
+                </div>
                 What's new?
               </Badge>
               <span className="hidden sm:inline">Automatically sync private commits</span>
@@ -41,7 +45,7 @@ export function HeroSection() {
             ref={titleRef}
             initial={{ opacity: 0, y: 20 }}
             animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ ...springTransition, delay: 0.2 }}
+            transition={{ ...springTransition, delay: 0.3 }}
             className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight"
           >
             Unlock the power of <br />
@@ -51,7 +55,7 @@ export function HeroSection() {
             ref={descriptionRef}
             initial={{ opacity: 0, y: 20 }}
             animate={isDescriptionInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ ...springTransition, delay: 0.3 }}
+            transition={{ ...springTransition, delay: 0.5 }}
             className="text-sm sm:text-base md:text-lg lg:text-xl font-normal text-muted-foreground max-w-2xl"
           >
             Transfer commit logs from private repositories to your profile
@@ -61,7 +65,7 @@ export function HeroSection() {
           ref={buttonsRef}
           initial={{ opacity: 0, y: 20 }}
           animate={isButtonsInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ ...springTransition, delay: 0.4 }}
+          transition={{ ...springTransition, delay: 0.7 }}
           className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
         >
           <Button variant="outline" className="w-full sm:w-auto">
@@ -76,7 +80,7 @@ export function HeroSection() {
           ref={disclaimerRef}
           initial={{ opacity: 0, y: 20 }}
           animate={isDisclaimerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ ...springTransition, delay: 0.5 }}
+          transition={{ ...springTransition, delay: 0.9 }}
           className="text-xs sm:text-sm font-light text-muted-foreground max-w-2xl"
         >
           Repository access required for commit log synchronization. Your code stays private and secure.
