@@ -55,8 +55,12 @@ export function Header() {
           <Contribu className="text-xl text-primary h-fit min-w-28 w-28" />
 
           <div className="flex flex-row gap-3">
-            <Button variant="outline">Sign in</Button>
-            <Button>Get started</Button>
+            <a href="https://app.contribu.me/signin">
+              <Button variant="outline">Sign in</Button>
+            </a>
+            <a href="https://app.contribu.me/signup">
+              <Button>Get started</Button>
+            </a>
           </div>
         </div>
       </header>

@@ -49,7 +49,7 @@ export function ProcessSection() {
   };
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12">
+    <section id="process" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12">
       <div className="flex flex-col gap-6 sm:gap-8 md:gap-12 max-w-7xl mx-auto">
         <div className="flex flex-col gap-2">
           <motion.h2

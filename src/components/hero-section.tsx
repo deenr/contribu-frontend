@@ -65,15 +65,17 @@ export function HeroSection() {
         </div>
         <div className="flex flex-col xs:flex-row gap-3 w-full sm:w-auto">
           <motion.div ref={learnMoreButtonRef} initial={{ opacity: 0, y: 20 }} animate={isLearnMoreButtonRefInView ? { opacity: 1, y: 0 } : {}} transition={{ ...springTransition, delay: 0.7 }}>
-            <Button variant="outline" className="w-full sm:w-auto">
+            <Button variant="outline" className="w-full sm:w-auto" onClick={() => document.getElementById('process')?.scrollIntoView({ behavior: 'smooth' })}>
               Learn more
             </Button>
           </motion.div>
           <motion.div ref={getStartedButtonRef} initial={{ opacity: 0, y: 20 }} animate={isGetStartedButtonRefInView ? { opacity: 1, y: 0 } : {}} transition={{ ...springTransition, delay: 0.9 }}>
-            <Button className="w-full sm:w-auto">
-              Get Started
-              <ArrowRight />
-            </Button>
+            <a href="https://app.contribu.me/signup">
+              <Button className="w-full sm:w-auto">
+                Get Started
+                <ArrowRight />
+              </Button>
+            </a>
           </motion.div>
         </div>
         <motion.p
