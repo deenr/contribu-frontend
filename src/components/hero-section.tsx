@@ -8,13 +8,15 @@ export function HeroSection() {
   const badgeRef = useRef(null);
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
-  const buttonsRef = useRef(null);
+  const learnMoreButtonRef = useRef(null);
+  const getStartedButtonRef = useRef(null);
   const disclaimerRef = useRef(null);
 
   const isBadgeInView = useInView(badgeRef, { once: true });
   const isTitleInView = useInView(titleRef, { once: true });
   const isDescriptionInView = useInView(descriptionRef, { once: true });
-  const isButtonsInView = useInView(buttonsRef, { once: true });
+  const isLearnMoreButtonRefInView = useInView(learnMoreButtonRef, { once: true });
+  const isGetStartedButtonRefInView = useInView(getStartedButtonRef, { once: true });
   const isDisclaimerInView = useInView(disclaimerRef, { once: true });
 
   const springTransition = {
@@ -49,7 +51,7 @@ export function HeroSection() {
             className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight"
           >
             Unlock the power of <br />
-            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">private contributions</span>
+            <span className="text-primary">private contributions</span>
           </motion.h1>
           <motion.p
             ref={descriptionRef}
@@ -61,26 +63,24 @@ export function HeroSection() {
             Transfer commit logs from private repositories to your profile
           </motion.p>
         </div>
-        <motion.div
-          ref={buttonsRef}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isButtonsInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ ...springTransition, delay: 0.7 }}
-          className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
-        >
-          <Button variant="outline" className="w-full sm:w-auto">
-            Learn more
-          </Button>
-          <Button className="w-full sm:w-auto">
-            Get Started
-            <ArrowRight />
-          </Button>
-        </motion.div>
+        <div className="flex flex-col xs:flex-row gap-3 w-full sm:w-auto">
+          <motion.div ref={learnMoreButtonRef} initial={{ opacity: 0, y: 20 }} animate={isLearnMoreButtonRefInView ? { opacity: 1, y: 0 } : {}} transition={{ ...springTransition, delay: 0.7 }}>
+            <Button variant="outline" className="w-full sm:w-auto">
+              Learn more
+            </Button>
+          </motion.div>
+          <motion.div ref={getStartedButtonRef} initial={{ opacity: 0, y: 20 }} animate={isGetStartedButtonRefInView ? { opacity: 1, y: 0 } : {}} transition={{ ...springTransition, delay: 0.9 }}>
+            <Button className="w-full sm:w-auto">
+              Get Started
+              <ArrowRight />
+            </Button>
+          </motion.div>
+        </div>
         <motion.p
           ref={disclaimerRef}
           initial={{ opacity: 0, y: 20 }}
           animate={isDisclaimerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ ...springTransition, delay: 0.9 }}
+          transition={{ ...springTransition, delay: 1.1 }}
           className="text-xs sm:text-sm font-light text-muted-foreground max-w-2xl"
         >
           Repository access required for commit log synchronization. Your code stays private and secure.
