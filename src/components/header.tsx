@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { Contribu } from './icons/Contribu';
 import { Button } from './ui/button';
@@ -6,7 +6,6 @@ import { Button } from './ui/button';
 export function Header() {
   const [isSticky, setIsSticky] = useState(false);
   const headerRef = useRef(null);
-  const isHeaderInView = useInView(headerRef, { once: true });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +52,7 @@ export function Header() {
           ${isSticky ? 'pl-5 bg-background/85 rounded-full backdrop-blur-lg border shadow-sm' : ''}
         `}
         >
-          <Contribu className="text-xl text-primary h-5 w-fit" />
+          <Contribu className="text-xl text-primary min-h-5 w-fit" />
 
           <div className="flex flex-row gap-3">
             <Button variant="outline">Sign in</Button>
