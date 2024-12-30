@@ -58,7 +58,7 @@ export function ProcessSection() {
             </motion.p>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {steps.map((step, index) => (
             <motion.div key={index} {...stepAnimation}>
               <ProcessStep number={index + 1} {...step} />

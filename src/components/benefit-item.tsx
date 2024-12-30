@@ -10,7 +10,7 @@ export function BenefitItem({ className, positive, negative }: { className?: str
           <h3 className="text-xl font-semibold">{positive.title}</h3>
           <p className="text-md font-normal text-muted-foreground">{positive.description}</p>
         </div>
-        <Badge variant="outline" className="md:hidden p-0 overflow-hidden border-none z-50 bg-background absolute top-[-16px] right-[29px]">
+        <Badge variant="outline" className="md:hidden p-0 overflow-hidden border-none z-10 bg-background absolute top-[-16px] right-[29px]">
           <div className="flex flex-row gap-1 items-center bg-primary/10 pl-2 pr-3 py-1.5 ">
             <Smile className="text-primary w-5 h-5" />
             <p className="text-sm sm:text-md font-medium text-primary">With Contribu</p>
@@ -25,7 +25,7 @@ export function BenefitItem({ className, positive, negative }: { className?: str
           <p className="text-md font-normal text-muted-foreground">{negative.description}</p>
         </div>
 
-        <Badge variant="outline" className="md:hidden p-0 overflow-hidden border-none z-50 bg-background absolute top-[-16px] right-[29px]">
+        <Badge variant="outline" className="md:hidden p-0 overflow-hidden border-none z-10 bg-background absolute top-[-16px] right-[29px]">
           <div className="flex flex-row gap-1 items-center bg-destructive/10 pl-2 pr-3 py-1.5 ">
             <Frown className="text-destructive w-5 h-5" />
             <p className="text-sm sm:text-md font-medium text-destructive">Without Contribu</p>
