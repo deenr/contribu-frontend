@@ -6,13 +6,13 @@ import { ProcessSection } from './components/process-section';
 
 function App() {
   return (
-    <>
+    <main>
       <Header />
       <HeroSection />
-      <BenefitsSection />
       <ProcessSection />
+      <BenefitsSection />
       <Footer />
-    </>
+    </main>
   );
 }
 
