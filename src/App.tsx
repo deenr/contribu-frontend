@@ -1,6 +1,6 @@
-import { Footer } from './components/Footer';
-import { Header } from './components/Header';
 import { BenefitsSection } from './components/benefit-section';
+import { Footer } from './components/footer';
+import { Header } from './components/header';
 import { HeroSection } from './components/hero-section';
 import { ProcessSection } from './components/process-section';
 
