@@ -22,7 +22,7 @@ export function Footer() {
       <div className="flex flex-col mx-auto max-w-7xl gap-6 sm:gap-8 md:gap-12">
         <div className="flex flex-col gap-12 md:gap-16 sm:flex-row justify-between">
           <div className="flex flex-col gap-6 md:gap-8">
-            <Contribu className="min-h-5 w-fit text-primary" />
+            <Contribu className="h-fit min-w-28 w-28 text-primary" />
             <p className="text-base text-muted-foreground font-normal">Unlock the power of private contributions</p>
           </div>
           <div className="grid grid-cols-2 sm:flex flex-row gap-8">

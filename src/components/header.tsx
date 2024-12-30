@@ -52,7 +52,7 @@ export function Header() {
           ${isSticky ? 'pl-5 bg-background/85 rounded-full backdrop-blur-lg border shadow-sm' : ''}
         `}
         >
-          <Contribu className="text-xl text-primary min-h-5 w-fit" />
+          <Contribu className="text-xl text-primary h-fit min-w-28 w-28" />
 
           <div className="flex flex-row gap-3">
             <Button variant="outline">Sign in</Button>
