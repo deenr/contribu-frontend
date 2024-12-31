@@ -1,5 +1,5 @@
+import { Badge } from '@repo/ui/badge';
 import { Check, Frown, Smile, X } from 'lucide-react';
-import { Badge } from './ui/badge';
 
 export function BenefitItem({ className, positive, negative }: { className?: string; positive: { title: string; description: string }; negative: { title: string; description: string } }) {
   return (

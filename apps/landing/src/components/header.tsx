@@ -1,7 +1,7 @@
+import { Button } from '@repo/ui/button';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { Contribu } from './icons/Contribu';
-import { Button } from './ui/button';
 
 export function Header() {
   const [isSticky, setIsSticky] = useState(false);

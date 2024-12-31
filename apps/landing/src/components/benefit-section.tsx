@@ -55,7 +55,7 @@ export function BenefitsSection() {
     }
   });
 
-  const scale = useTransform(scrollY, transformBounderies, [0.8, 1]);
+  const scale = useTransform(scrollY, transformBounderies, [0.9, 1]);
 
   const [isAboveMd, setIsAboveMd] = useState(false);
 

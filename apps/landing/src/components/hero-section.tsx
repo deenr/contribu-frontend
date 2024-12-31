@@ -1,8 +1,8 @@
+import { Badge } from '@repo/ui/badge';
+import { Button } from '@repo/ui/button';
 import { motion, useInView } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useRef } from 'react';
-import { Badge } from './ui/badge';
-import { Button } from './ui/button';
 
 export function HeroSection() {
   const badgeRef = useRef(null);

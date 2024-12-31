@@ -1,4 +1,4 @@
-import { Badge } from './ui/badge';
+import { Badge } from '@repo/ui/badge';
 
 export function ProcessStep({ className, number, title, description, icon }: { className?: string; number: number; title: string; description: string; icon: JSX.Element }) {
   return (
