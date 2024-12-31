@@ -26,11 +26,13 @@ export function Footer() {
           </div>
           <div className="grid grid-cols-2 sm:flex flex-row gap-8">
             {links.map(({ title, links }) => (
-              <div className="md:min-w-28 flex flex-col gap-4">
+              <div key={title} className="md:min-w-28 flex flex-col gap-4">
                 <div className="text-sm text-muted-foreground font-normal">{title}</div>
                 <div className="flex flex-col gap-3">
                   {links.map((link) => (
-                    <a className="text-base text-muted-foreground font-medium">{link.title}</a>
+                    <a key={link.title} className="text-base text-muted-foreground font-medium">
+                      {link.title}
+                    </a>
                   ))}
                 </div>
               </div>

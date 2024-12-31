@@ -50,8 +50,8 @@ export function BenefitsSection() {
   const [transformBounderies, setTransformBounderies] = useState<[number, number]>([0, 1000]);
   useMotionValueEvent(scrollY, 'change', () => {
     if (sectionRef.current) {
-      const { offsetTop, offsetHeight } = sectionRef.current;
-      setTransformBounderies([offsetTop / 2, offsetHeight]);
+      const { offsetTop, clientHeight } = sectionRef.current;
+      setTransformBounderies([-440, offsetTop + clientHeight]);
     }
   });
 
