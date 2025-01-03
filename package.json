@@ -6,8 +6,17 @@
     "apps/*",
     "packages/*"
   ],
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
   "packageManager": "npm@8.5.0",
   "devDependencies": {
     "turbo": "^2.3.3"
+  },
+  "dependencies": {
+    "prettier": "^3.4.2"
   }
 }
