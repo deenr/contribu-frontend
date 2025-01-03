@@ -27,15 +27,15 @@ export function HeroSection() {
   };
 
   return (
-    <section className="pt-28 pb-16 sm:pt-32 sm:pb-20 md:pt-48 md:pb-24 px-4 sm:px-6 md:px-8 lg:px-12 dark:bg-muted/30 bg-muted">
-      <div className="flex flex-col mx-auto max-w-7xl gap-6 sm:gap-8 md:gap-12">
-        <div className="flex flex-col gap-4 items-start">
+    <section className="dark:bg-muted/30 bg-muted px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 md:px-8 md:pb-24 md:pt-48 lg:px-12">
+      <div className="mx-auto flex max-w-7xl flex-col gap-6 sm:gap-8 md:gap-12">
+        <div className="flex flex-col items-start gap-4">
           <motion.div ref={badgeRef} initial={{ opacity: 0, y: 20 }} animate={isBadgeInView ? { opacity: 1, y: 0 } : {}} transition={{ ...springTransition, delay: 0.1 }}>
-            <Badge variant="outline" className="flex flex-row pl-1 py-1 gap-2 font-medium text-xs sm:text-sm text-muted-foreground bg-background">
-              <Badge variant="outline" className="font-medium text-xs sm:text-sm text-muted-foreground">
-                <div className="relative w-1.5 h-1.5 mr-1.5">
-                  <div className="absolute w-full h-full bg-primary rounded-full animate-ping"></div>
-                  <div className="absolute w-full h-full bg-primary rounded-full"></div>
+            <Badge variant="outline" className="text-muted-foreground bg-background flex flex-row gap-2 py-1 pl-1 text-xs font-medium sm:text-sm">
+              <Badge variant="outline" className="text-muted-foreground text-xs font-medium sm:text-sm">
+                <div className="relative mr-1.5 h-1.5 w-1.5">
+                  <div className="bg-primary absolute h-full w-full animate-ping rounded-full"></div>
+                  <div className="bg-primary absolute h-full w-full rounded-full"></div>
                 </div>
                 What's new?
               </Badge>
@@ -48,7 +48,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
             transition={{ ...springTransition, delay: 0.3 }}
-            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight"
+            className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl xl:text-7xl"
           >
             Unlock the power of <br />
             <span className="text-primary">private contributions</span>
@@ -58,12 +58,12 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isDescriptionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ ...springTransition, delay: 0.5 }}
-            className="text-sm sm:text-base md:text-lg lg:text-xl font-normal text-muted-foreground max-w-2xl"
+            className="text-muted-foreground max-w-2xl text-sm font-normal sm:text-base md:text-lg lg:text-xl"
           >
             Transfer commit logs from private repositories to your profile
           </motion.p>
         </div>
-        <div className="flex flex-col xs:flex-row gap-3 w-full sm:w-auto">
+        <div className="xs:flex-row flex w-full flex-col gap-3 sm:w-auto">
           <motion.div ref={learnMoreButtonRef} initial={{ opacity: 0, y: 20 }} animate={isLearnMoreButtonRefInView ? { opacity: 1, y: 0 } : {}} transition={{ ...springTransition, delay: 0.7 }}>
             <Button variant="outline" className="w-full sm:w-auto" onClick={() => document.getElementById('process')?.scrollIntoView({ behavior: 'smooth' })}>
               Learn more
@@ -83,7 +83,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isDisclaimerInView ? { opacity: 1, y: 0 } : {}}
           transition={{ ...springTransition, delay: 1.1 }}
-          className="text-xs sm:text-sm font-light text-muted-foreground max-w-2xl"
+          className="text-muted-foreground max-w-2xl text-xs font-light sm:text-sm"
         >
           Repository access required for commit log synchronization. Your code stays private and secure.
         </motion.p>

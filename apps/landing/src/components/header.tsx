@@ -38,24 +38,15 @@ export function Header() {
   return (
     <motion.div ref={headerRef} initial={headerAnimation.initial} animate={headerAnimation.animate} transition={headerAnimation.transition}>
       <header
-        className={`
-        fixed z-50 left-1/2 translate-x-[-50%] 
-        px-4 sm:px-6 md:px-8 lg:px-12 
-        transition-all duration-300 ease-in-out
-        ${isSticky ? 'w-full sm:w-3/4 md:w-2/3 xl:w-1/2 py-4' : 'w-full py-2 '}
-      `}
+        className={`fixed left-1/2 z-50 translate-x-[-50%] px-4 transition-all duration-300 ease-in-out sm:px-6 md:px-8 lg:px-12 ${isSticky ? 'w-full py-4 sm:w-3/4 md:w-2/3 xl:w-1/2' : 'w-full py-2'} `}
       >
         <div
-          className={`
-          py-2.5 flex flex-row justify-between items-center mx-auto max-w-7xl gap-6 sm:gap-8 md:gap-12 
-          transition-all duration-300 ease-in-out
-          ${isSticky ? 'p-2.5 bg-background/85 rounded-full backdrop-blur-lg border shadow-sm' : ''}
-        `}
+          className={`mx-auto flex max-w-7xl flex-row items-center justify-between gap-6 py-2.5 transition-all duration-300 ease-in-out sm:gap-8 md:gap-12 ${isSticky ? 'bg-background/85 rounded-full border p-2.5 shadow-sm backdrop-blur-lg' : ''} `}
         >
-          <Contribu className="text-xl text-primary min-h-5 h-5 min-w-28 w-28" />
+          <Contribu className="text-primary h-5 min-h-5 w-28 min-w-28 text-xl" />
 
           <div className="flex flex-row gap-3">
-            <a className="hidden xs:block" href="https://app.contribu.me/signin">
+            <a className="xs:block hidden" href="https://app.contribu.me/signin">
               <Button variant="outline">Sign in</Button>
             </a>
             <a href="https://app.contribu.me/signup">

@@ -3,32 +3,32 @@ import { Check, Frown, Smile, X } from 'lucide-react';
 
 export function BenefitItem({ className, positive, negative }: { className?: string; positive: { title: string; description: string }; negative: { title: string; description: string } }) {
   return (
-    <article className={`flex flex-col md:flex-row md:border md:rounded-3xl md:p-8 gap-8 md:gap-12 md:overflow-hidden md:bg-background ${className}`}>
-      <div className="relative flex-1 p-6 sm:p-8 md:p-0 border md:border-none rounded-3xl md:rounded-none bg-background md:bg-none ">
-        <Check className="bg-primary text-background p-1 rounded-full" />
-        <div className="flex flex-col gap-2 mt-8">
+    <article className={`md:bg-background flex flex-col gap-8 md:flex-row md:gap-12 md:overflow-hidden md:rounded-3xl md:border md:p-8 ${className}`}>
+      <div className="bg-background relative flex-1 rounded-3xl border p-6 sm:p-8 md:rounded-none md:border-none md:bg-none md:p-0">
+        <Check className="bg-primary text-background rounded-full p-1" />
+        <div className="mt-8 flex flex-col gap-2">
           <h3 className="text-xl font-semibold">{positive.title}</h3>
-          <p className="text-md font-normal text-muted-foreground">{positive.description}</p>
+          <p className="text-md text-muted-foreground font-normal">{positive.description}</p>
         </div>
-        <Badge variant="outline" className="md:hidden p-0 overflow-hidden border-none z-10 bg-background absolute top-[-16px] right-[29px]">
-          <div className="flex flex-row gap-1 items-center bg-primary/10 pl-2 pr-3 py-1.5 ">
-            <Smile className="text-primary w-5 h-5" />
-            <p className="text-sm sm:text-md font-medium text-primary">With Contribu</p>
+        <Badge variant="outline" className="bg-background absolute right-[29px] top-[-16px] z-10 overflow-hidden border-none p-0 md:hidden">
+          <div className="bg-primary/10 flex flex-row items-center gap-1 py-1.5 pl-2 pr-3">
+            <Smile className="text-primary h-5 w-5" />
+            <p className="sm:text-md text-primary text-sm font-medium">With Contribu</p>
           </div>
         </Badge>
       </div>
-      <div className="hidden md:block w-[1px] bg-border"></div>
-      <div className="relative flex-1 p-6 sm:p-8 md:p-0 border md:border-none rounded-3xl md:rounded-none bg-background md:bg-none ">
-        <X className="bg-destructive text-background p-1 rounded-full " />
-        <div className="flex flex-col gap-2 mt-8">
+      <div className="bg-border hidden w-[1px] md:block"></div>
+      <div className="bg-background relative flex-1 rounded-3xl border p-6 sm:p-8 md:rounded-none md:border-none md:bg-none md:p-0">
+        <X className="bg-destructive text-background rounded-full p-1" />
+        <div className="mt-8 flex flex-col gap-2">
           <h3 className="text-xl font-semibold">{negative.title}</h3>
-          <p className="text-md font-normal text-muted-foreground">{negative.description}</p>
+          <p className="text-md text-muted-foreground font-normal">{negative.description}</p>
         </div>
 
-        <Badge variant="outline" className="md:hidden p-0 overflow-hidden border-none z-10 bg-background absolute top-[-16px] right-[29px]">
-          <div className="flex flex-row gap-1 items-center bg-destructive/10 pl-2 pr-3 py-1.5 ">
-            <Frown className="text-destructive w-5 h-5" />
-            <p className="text-sm sm:text-md font-medium text-destructive">Without Contribu</p>
+        <Badge variant="outline" className="bg-background absolute right-[29px] top-[-16px] z-10 overflow-hidden border-none p-0 md:hidden">
+          <div className="bg-destructive/10 flex flex-row items-center gap-1 py-1.5 pl-2 pr-3">
+            <Frown className="text-destructive h-5 w-5" />
+            <p className="sm:text-md text-destructive text-sm font-medium">Without Contribu</p>
           </div>
         </Badge>
       </div>

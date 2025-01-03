@@ -74,11 +74,11 @@ export function BenefitsSection() {
 
   return (
     <motion.div ref={sectionRef} {...sectionAnimation2}>
-      <motion.section {...sectionAnimation} style={isAboveMd ? { scale } : {}} className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12">
-        <div className="relative mx-auto max-w-7xl flex flex-col gap-8 md:gap-16">
-          <div className="md:sticky pb-12 md:pb-80 top-[160px] flex flex-col items-center gap-2">
-            <h2 className="font-medium text-xs sm:text-sm text-muted-foreground">Benefits</h2>
-            <p className="flex-1 text-2xl sm:text-4xl font-semibold text-center">
+      <motion.section {...sectionAnimation} style={isAboveMd ? { scale } : {}} className="px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:px-12">
+        <div className="relative mx-auto flex max-w-7xl flex-col gap-8 md:gap-16">
+          <div className="top-[160px] flex flex-col items-center gap-2 pb-12 md:sticky md:pb-80">
+            <h2 className="text-muted-foreground text-xs font-medium sm:text-sm">Benefits</h2>
+            <p className="flex-1 text-center text-2xl font-semibold sm:text-4xl">
               Why Developers Trust Contribu: <br />
               <span className="text-muted-foreground">Built for Transparency, Privacy, and Accessibility.</span>
             </p>
@@ -86,15 +86,15 @@ export function BenefitsSection() {
           {benefits.map((benefit, index) => (
             <div key={index} className="md:sticky md:mx-auto md:max-w-[90%] lg:max-w-[850px]" style={{ top: `${380 + index * 20}px` }}>
               {index === 0 ? (
-                <div className="absolute top-[-48px] w-full  hidden md:flex flex-row gap-12 px-8 pb-6">
-                  <div className="flex-1 flex flex-row gap-2 items-center">
-                    <Smile className="text-primary w-4 h-4 sm:w-6 sm:h-6" />
-                    <p className="text-sm sm:text-md font-semibold text-primary">With Contribu.me</p>
+                <div className="absolute top-[-48px] hidden w-full flex-row gap-12 px-8 pb-6 md:flex">
+                  <div className="flex flex-1 flex-row items-center gap-2">
+                    <Smile className="text-primary h-4 w-4 sm:h-6 sm:w-6" />
+                    <p className="sm:text-md text-primary text-sm font-semibold">With Contribu.me</p>
                   </div>
                   <div></div>
-                  <div className="flex-1 flex flex-row gap-2 items-center">
-                    <Frown className="text-destructive w-4 h-4 sm:w-6 sm:h-6" />
-                    <p className="text-sm sm:text-md font-semibold text-destructive">Without</p>
+                  <div className="flex flex-1 flex-row items-center gap-2">
+                    <Frown className="text-destructive h-4 w-4 sm:h-6 sm:w-6" />
+                    <p className="sm:text-md text-destructive text-sm font-semibold">Without</p>
                   </div>
                 </div>
               ) : (
