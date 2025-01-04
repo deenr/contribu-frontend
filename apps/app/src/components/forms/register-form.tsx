@@ -1,9 +1,9 @@
 import { Bitbucket } from '@/components/icons/bitbucket';
 import { GitHub } from '@/components/icons/github';
 import { GitLab } from '@/components/icons/gitlab';
-import { Button } from '@repo/ui/button';
-import { Input } from '@repo/ui/input';
-import { Label } from '@repo/ui/label';
+import { Button } from '@repo/ui/components/ui/button';
+import { Input } from '@repo/ui/components/ui/input';
+import { Label } from '@repo/ui/components/ui/label';
 import { cn } from '@repo/ui/lib/utils';
 import { Link } from 'react-router';
 

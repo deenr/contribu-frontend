@@ -1,5 +1,5 @@
-import { Badge } from '@repo/ui/badge';
-import { Button } from '@repo/ui/button';
+import { Badge } from '@repo/ui/components/ui/badge';
+import { Button } from '@repo/ui/components/ui/button';
 import { motion, useInView } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useRef } from 'react';
@@ -31,8 +31,8 @@ export function HeroSection() {
       <div className="mx-auto flex max-w-7xl flex-col gap-6 sm:gap-8 md:gap-12">
         <div className="flex flex-col items-start gap-4">
           <motion.div ref={badgeRef} initial={{ opacity: 0, y: 20 }} animate={isBadgeInView ? { opacity: 1, y: 0 } : {}} transition={{ ...springTransition, delay: 0.1 }}>
-            <Badge variant="outline" className="text-muted-foreground bg-background flex flex-row gap-2 py-1 pl-1 text-xs font-medium sm:text-sm">
-              <Badge variant="outline" className="text-muted-foreground text-xs font-medium sm:text-sm">
+            <Badge variant="outline" className="text-muted-foreground bg-background flex flex-row gap-2 rounded-full py-1 pl-1 text-xs font-medium sm:text-sm">
+              <Badge variant="outline" className="text-muted-foreground rounded-full text-xs font-medium sm:text-sm">
                 <div className="relative mr-1.5 h-1.5 w-1.5">
                   <div className="bg-primary absolute h-full w-full animate-ping rounded-full"></div>
                   <div className="bg-primary absolute h-full w-full rounded-full"></div>
@@ -65,13 +65,13 @@ export function HeroSection() {
         </div>
         <div className="xs:flex-row flex w-full flex-col gap-3 sm:w-auto">
           <motion.div ref={learnMoreButtonRef} initial={{ opacity: 0, y: 20 }} animate={isLearnMoreButtonRefInView ? { opacity: 1, y: 0 } : {}} transition={{ ...springTransition, delay: 0.7 }}>
-            <Button variant="outline" className="w-full sm:w-auto" onClick={() => document.getElementById('process')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button variant="outline" className="w-full rounded-full sm:w-auto" onClick={() => document.getElementById('process')?.scrollIntoView({ behavior: 'smooth' })}>
               Learn more
             </Button>
           </motion.div>
           <motion.div ref={getStartedButtonRef} initial={{ opacity: 0, y: 20 }} animate={isGetStartedButtonRefInView ? { opacity: 1, y: 0 } : {}} transition={{ ...springTransition, delay: 0.9 }}>
             <a href="https://app.contribu.me/signup">
-              <Button className="w-full sm:w-auto">
+              <Button className="w-full rounded-full sm:w-auto">
                 Get Started
                 <ArrowRight />
               </Button>

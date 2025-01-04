@@ -1,9 +1,9 @@
-import { Badge } from '@repo/ui/badge';
+import { Badge } from '@repo/ui/components/ui/badge';
 
 export function ProcessStep({ className, number, title, description, icon }: { className?: string; number: number; title: string; description: string; icon: JSX.Element }) {
   return (
     <article className={`bg-background relative overflow-hidden rounded-3xl border p-6 sm:p-8 ${className}`}>
-      <Badge className="absolute right-3 top-3">Step {number}</Badge>
+      <Badge className="absolute right-3 top-3 rounded-full">Step {number}</Badge>
 
       <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg p-2 sm:h-12 sm:w-12 sm:p-3">{icon}</div>
       <div className="mt-6 flex flex-col gap-2 sm:mt-8">

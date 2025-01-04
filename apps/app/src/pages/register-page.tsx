@@ -1,7 +1,7 @@
 import { RegisterForm } from '@/components/forms/register-form';
 import { Contribu } from '@/components/icons/contribu';
 
-export default function RegisterPage() {
+export function RegisterPage() {
   return (
     <div className="grid min-h-svh">
       <div className="flex flex-col gap-4 p-6 md:p-10">

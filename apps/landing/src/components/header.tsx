@@ -1,4 +1,4 @@
-import { Button } from '@repo/ui/button';
+import { Button } from '@repo/ui/components/ui/button';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { Contribu } from './icons/Contribu';
@@ -47,10 +47,12 @@ export function Header() {
 
           <div className="flex flex-row gap-3">
             <a className="xs:block hidden" href="https://app.contribu.me/signin">
-              <Button variant="outline">Sign in</Button>
+              <Button variant="outline" className="rounded-full">
+                Sign in
+              </Button>
             </a>
             <a href="https://app.contribu.me/signup">
-              <Button>Get started</Button>
+              <Button className="rounded-full">Get started</Button>
             </a>
           </div>
         </div>

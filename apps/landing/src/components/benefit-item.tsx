@@ -1,4 +1,4 @@
-import { Badge } from '@repo/ui/badge';
+import { Badge } from '@repo/ui/components/ui/badge';
 import { Check, Frown, Smile, X } from 'lucide-react';
 
 export function BenefitItem({ className, positive, negative }: { className?: string; positive: { title: string; description: string }; negative: { title: string; description: string } }) {
@@ -10,7 +10,7 @@ export function BenefitItem({ className, positive, negative }: { className?: str
           <h3 className="text-xl font-semibold">{positive.title}</h3>
           <p className="text-md text-muted-foreground font-normal">{positive.description}</p>
         </div>
-        <Badge variant="outline" className="bg-background absolute right-[29px] top-[-16px] z-10 overflow-hidden border-none p-0 md:hidden">
+        <Badge variant="outline" className="bg-background absolute right-[29px] top-[-16px] z-10 overflow-hidden rounded-full border-none p-0 md:hidden">
           <div className="bg-primary/10 flex flex-row items-center gap-1 py-1.5 pl-2 pr-3">
             <Smile className="text-primary h-5 w-5" />
             <p className="sm:text-md text-primary text-sm font-medium">With Contribu</p>
@@ -25,7 +25,7 @@ export function BenefitItem({ className, positive, negative }: { className?: str
           <p className="text-md text-muted-foreground font-normal">{negative.description}</p>
         </div>
 
-        <Badge variant="outline" className="bg-background absolute right-[29px] top-[-16px] z-10 overflow-hidden border-none p-0 md:hidden">
+        <Badge variant="outline" className="bg-background absolute right-[29px] top-[-16px] z-10 overflow-hidden rounded-full border-none p-0 md:hidden">
           <div className="bg-destructive/10 flex flex-row items-center gap-1 py-1.5 pl-2 pr-3">
             <Frown className="text-destructive h-5 w-5" />
             <p className="sm:text-md text-destructive text-sm font-medium">Without Contribu</p>
