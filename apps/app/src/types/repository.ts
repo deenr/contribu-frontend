@@ -1,7 +1,12 @@
-export type RepositoryService = 'github' | 'gitlab' | 'bitbucket';
+export type RepositoryPlatform = 'github' | 'gitlab' | 'bitbucket';
 
 export interface RepositoryInfo {
-  service: RepositoryService;
+  platform: RepositoryPlatform;
   repository: string;
   email: string;
+}
+
+export interface NewRepositoryConfig {
+  platform: RepositoryPlatform;
+  name: string;
 }

@@ -1,183 +1,163 @@
 import { Bitbucket } from '@/components/icons/bitbucket';
 import { GitHub } from '@/components/icons/github';
 import { GitLab } from '@/components/icons/gitlab';
-import { RepositoryInfo } from '@/types/repository';
+import { RepositoryInfo, RepositoryPlatform } from '@/types/repository';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@repo/ui/components/ui/button';
-import { FormControl, FormField, FormItem, FormMessage } from '@repo/ui/components/ui/form';
+import { Form, FormControl, FormField, FormItem } from '@repo/ui/components/ui/form';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/components/ui/select';
-import { Separator } from '@repo/ui/components/ui/separator';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Plus, Trash } from 'lucide-react';
-import { MutableRefObject, useEffect } from 'react';
-import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
+import { ChevronRight, Plus, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 type SelectReposStepProps = {
   repositories: RepositoryInfo[];
-  onSubmitRef: MutableRefObject<(() => void) | undefined>;
   onSubmitRepositories: (repos: RepositoryInfo[]) => void;
 };
 
-export const SelectReposSchema = z.object({
-  repositories: z.array(
-    z
-      .object({
-        service: z.enum(['github', 'gitlab', 'bitbucket'], { required_error: 'Please select a service.' }).optional(),
-        repository: z.string({ required_error: 'Please select a valid repository.' }).optional(),
-        email: z.string({ required_error: 'Please select an email to fetch the correct commits.' }).email().optional()
-      })
-      .refine((data) => Object.values(data).every((value) => value !== undefined), { message: 'All fields must be filled', path: ['service'] })
-  )
+export const RepositoryInfoSchema = z.object({
+  platform: z.enum(['github', 'gitlab', 'bitbucket']),
+  repository: z.string(),
+  email: z.string().email()
 });
 
-type FormValues = z.infer<typeof SelectReposSchema>;
+type FormValues = z.infer<typeof RepositoryInfoSchema>;
 
-export function SelectReposStep({ repositories, onSubmitRef, onSubmitRepositories }: SelectReposStepProps) {
-  const form = useForm<FormValues>({
-    resolver: zodResolver(SelectReposSchema),
-    defaultValues: {
-      repositories: repositories && repositories.length > 0 ? repositories : [{ service: undefined, repository: undefined, email: undefined }]
-    }
-  });
-
-  const { fields, append, remove } = useFieldArray({
-    control: form.control,
-    name: 'repositories'
-  });
-
-  const addRepoInput = () => {
-    append({ service: undefined, repository: undefined, email: undefined });
-  };
-
-  const removeRepoInput = (index: number) => {
-    remove(index);
-  };
+export function SelectReposStep({ repositories, onSubmitRepositories }: SelectReposStepProps) {
+  const [repos, setRepos] = useState<RepositoryInfo[]>(repositories);
 
   useEffect(() => {
-    if (onSubmitRef) {
-      onSubmitRef.current = form.handleSubmit((data) => {
-        const filteredRepos = data.repositories.filter((repo) => repo.service !== undefined && repo.repository !== undefined && repo.email !== undefined);
-        onSubmitRepositories(filteredRepos as RepositoryInfo[]);
-      });
+    onSubmitRepositories(repos);
+  }, [repos]);
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(RepositoryInfoSchema),
+    defaultValues: { platform: undefined, repository: undefined, email: undefined }
+  });
+
+  function onSubmit(data: z.infer<typeof RepositoryInfoSchema>) {
+    setRepos((prevRepos) => [...prevRepos, data]);
+    form.reset({ platform: 'github', repository: '', email: '' }, { keepValues: false });
+  }
+
+  function removeRepo(index: number) {
+    setRepos((prevRepos) => prevRepos.filter((_, i) => i !== index));
+  }
+
+  function getIcon(platform: RepositoryPlatform) {
+    switch (platform) {
+      case 'github':
+        return <GitHub className="size-4" />;
+      case 'gitlab':
+        return <GitLab className="size-4" />;
+      case 'bitbucket':
+        return <Bitbucket className="size-4" />;
     }
-  }, [onSubmitRef, form]);
+  }
 
   return (
-    <FormProvider {...form}>
-      <form className="flex flex-col">
-        <AnimatePresence mode="sync">
-          {fields.map((item, index) => (
-            <div id={item.id} key={item.id}>
-              <div className="grid grid-cols-[1fr_1fr_36px] gap-3">
-                <FormField
-                  control={form.control}
-                  name={`repositories.${index}.service`}
-                  render={({ field }) => (
-                    <FormItem>
-                      <Select value={field.value} onValueChange={field.onChange} aria-label="Select repository service">
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select a service" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectGroup>
-                            <SelectItem value="github">
-                              <div className="flex items-center">
-                                <GitHub className="mr-2 h-4 w-4" />
-                                GitHub
-                              </div>
-                            </SelectItem>
-                            <SelectItem value="gitlab">
-                              <div className="flex items-center">
-                                <GitLab className="mr-2 h-4 w-4" />
-                                GitLab
-                              </div>
-                            </SelectItem>
-                            <SelectItem value="bitbucket">
-                              <div className="flex items-center">
-                                <Bitbucket className="mr-2 h-4 w-4" />
-                                Bitbucket
-                              </div>
-                            </SelectItem>
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button variant="outline" size="icon" aria-label="Remove repository" onClick={() => removeRepoInput(index)} type="button">
-                  <Trash className="h-4 w-4" />
-                </Button>
-
-                {form.watch(`repositories.${index}.service`) && (
-                  <FormField
-                    control={form.control}
-                    name={`repositories.${index}.repository`}
-                    render={({ field }) => (
-                      <FormItem className="col-start-2 row-start-1">
-                        <motion.div initial={{ opacity: 0, width: 0, x: -10 }} animate={{ opacity: 1, width: 'auto', x: 0 }}>
-                          <Select value={field.value} onValueChange={field.onChange} aria-label="Select repository">
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select a repository" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectGroup>
-                                <SelectItem value="repo-1">Repository 1</SelectItem>
-                                <SelectItem value="repo-2">Repository 2</SelectItem>
-                                <SelectItem value="repo-3">Repository 3</SelectItem>
-                                <SelectItem value="repo-4">Repository 4</SelectItem>
-                              </SelectGroup>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </motion.div>
-                      </FormItem>
-                    )}
-                  />
-                )}
-
-                {form.watch(`repositories.${index}.repository`) && (
-                  <FormField
-                    control={form.control}
-                    name={`repositories.${index}.email`}
-                    render={({ field }) => (
-                      <FormItem className="col-span-2">
-                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }}>
-                          <Select value={field.value} onValueChange={field.onChange} aria-label="Select email">
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select email" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectGroup>
-                                <SelectItem value="deanreymen@outlook.be">deanreymen@outlook.be</SelectItem>
-                                <SelectItem value="iamdeanreymen@gmail.com">iamdeanreymen@gmail.com</SelectItem>
-                              </SelectGroup>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </motion.div>
-                      </FormItem>
-                    )}
-                  />
-                )}
-              </div>
-              <Separator className="my-4" />
-            </div>
-          ))}
-        </AnimatePresence>
-
-        <Button variant="outline" disabled={!form.formState.isValid} onClick={addRepoInput} type="button" className="w-full border-dashed">
-          <Plus className="mr-2 h-4 w-4" />
-          Add another repository
-        </Button>
-      </form>
-    </FormProvider>
+    <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex grid-cols-2 grid-rows-3 flex-col gap-4 md:grid">
+          <FormField
+            control={form.control}
+            name="platform"
+            render={({ field }) => (
+              <FormItem>
+                <Select value={field.value} onValueChange={field.onChange} aria-label="Select repository platform">
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a platform" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="github">
+                        <div className="flex items-center">
+                          <GitHub className="mr-2 size-4" />
+                          GitHub
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="gitlab">
+                        <div className="flex items-center">
+                          <GitLab className="mr-2 size-4" />
+                          GitLab
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="bitbucket">
+                        <div className="flex items-center">
+                          <Bitbucket className="mr-2 size-4" />
+                          Bitbucket
+                        </div>
+                      </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="repository"
+            render={({ field }) => (
+              <FormItem>
+                <Select value={field.value} onValueChange={field.onChange} aria-label="Select repository">
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a repository" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="Repository 1">Repository 1</SelectItem>
+                      <SelectItem value="Repository 2">Repository 2</SelectItem>
+                      <SelectItem value="Repository 3">Repository 3</SelectItem>
+                      <SelectItem value="Repository 4">Repository 4</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <Select value={field.value} onValueChange={field.onChange} aria-label="Select email">
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select email" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="deanreymen@outlook.be">deanreymen@outlook.be</SelectItem>
+                      <SelectItem value="iamdeanreymen@gmail.com">iamdeanreymen@gmail.com</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+          <Button variant="outline" type="submit" className="col-span-2 w-full border-dashed">
+            <Plus className="mr-2 size-4" />
+            Add another repository
+          </Button>
+        </form>
+      </Form>
+      {repos.map(({ platform, repository, email }, index) => (
+        <div key={`${platform}${repository}${email}`} className="bg-muted rounded-md px-4 py-2">
+          <div className="flex flex-row items-center gap-1">
+            {getIcon(platform)}
+            <p className="ml-1 text-sm">{repository}</p>
+            <ChevronRight className="text-muted-foreground size-4" />
+            <p className="text-sm">{email}</p>
+            <X className="ml-auto size-4 cursor-pointer" onClick={() => removeRepo(index)} />
+          </div>
+        </div>
+      ))}
+    </>
   );
 }

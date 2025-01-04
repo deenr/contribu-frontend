@@ -1,10 +1,11 @@
 import { ProgressStep, StepKey } from '@/types/progress-steps';
-import { RepositoryInfo } from '@/types/repository';
+import { NewRepositoryConfig, RepositoryInfo } from '@/types/repository';
 import { Button } from '@repo/ui/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@repo/ui/components/ui/dialog';
 import { Combine, Eye, FolderPlus, GitMerge, RotateCw } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { ProgressSteps } from './progress-steps';
+import { ConfigureRepoStep } from './steps/configure-repo-step';
 import { SelectReposStep } from './steps/select-repos-step';
 
 const STEPS: ProgressStep<StepKey>[] = [
@@ -31,33 +32,37 @@ const DESCRIPTIONS = new Map<StepKey, string>([
 export function MergeRepoDialog() {
   const [currentStep, setCurrentStep] = useState(0);
   const [repositories, setRepositories] = useState<RepositoryInfo[]>([]);
-  const formSubmitRef = useRef<() => void>();
+  const [newRepositoryConfig, setNewRepositoryConfig] = useState<NewRepositoryConfig>();
 
   const getCurrentStep = () => STEPS[currentStep];
 
-  const renderStep = () => {
+  function renderStep() {
     switch (getCurrentStep().key) {
       case 'select':
-        return (
-          <SelectReposStep
-            repositories={repositories}
-            onSubmitRef={formSubmitRef}
-            onSubmitRepositories={(repos) => {
-              setRepositories(repos);
-              setCurrentStep((prev) => prev + 1);
-            }}
-          />
-        );
+        return <SelectReposStep repositories={repositories} onSubmitRepositories={(repos) => setRepositories(repos)} />;
+      case 'configure':
+        return <ConfigureRepoStep config={newRepositoryConfig} onConfigChange={setNewRepositoryConfig} />;
       default:
         return null;
     }
-  };
+  }
 
-  const handleSubmitForm = () => {
-    if (formSubmitRef.current) {
-      formSubmitRef.current();
+  function nextStep() {
+    setCurrentStep((prevStep) => prevStep + 1);
+  }
+
+  function currentStepValid() {
+    switch (getCurrentStep().key) {
+      case 'select':
+        return repositories.length > 0;
+      case 'configure':
+        if (newRepositoryConfig === undefined) return false;
+        const { platform, name } = newRepositoryConfig;
+        return platform !== undefined && name !== undefined && name !== '';
+      default:
+        return false;
     }
-  };
+  }
 
   return (
     <Dialog>
@@ -69,7 +74,7 @@ export function MergeRepoDialog() {
       </DialogTrigger>
       <DialogContent className="sm:w-fit sm:max-w-none">
         <DialogHeader>
-          <ProgressSteps className="mr-6" steps={STEPS} currentStep={getCurrentStep()} />
+          <ProgressSteps className="mr-6 w-1/3 md:w-full" steps={STEPS} currentStep={getCurrentStep()} />
           <DialogTitle className="!mt-4">{TITLES.get(getCurrentStep().key)}</DialogTitle>
           <DialogDescription>{DESCRIPTIONS.get(getCurrentStep().key)}</DialogDescription>
         </DialogHeader>
@@ -80,9 +85,11 @@ export function MergeRepoDialog() {
               Back
             </Button>
           )}
-          <Button onClick={handleSubmitForm} type="button">
-            Continue
-          </Button>
+          {currentStep < 2 && (
+            <Button disabled={!currentStepValid()} type="button" onClick={nextStep}>
+              Continue
+            </Button>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>
