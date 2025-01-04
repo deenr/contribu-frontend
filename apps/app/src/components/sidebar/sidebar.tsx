@@ -5,7 +5,7 @@ import { Contribu } from '../icons/contribu';
 export function Sidebar({ className, ...props }: React.ComponentPropsWithoutRef<'aside'>) {
   const topItems = [
     { icon: <Home className="h-5 w-5" />, title: 'Dashboard', link: '/' },
-    { icon: <FolderGit2 className="h-5 w-5" />, title: 'Repositories', link: '/repo' }
+    { icon: <FolderGit2 className="h-5 w-5" />, title: 'Repositories', link: '/repository' }
   ];
   const bottomItems = [{ icon: <LogOut className="h-5 w-5" />, title: 'Sign out', link: '/logout' }];
 
