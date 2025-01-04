@@ -14,7 +14,11 @@ export function Sidebar({ className, ...props }: React.ComponentPropsWithoutRef<
       <Contribu className="text-primary h-6 w-fit px-5" />
       <div className="flex flex-col gap-1 px-4">
         {topItems.map(({ title, icon, link }) => (
-          <NavLink className="text-muted-foreground hover:bg-muted aria-[current=page]:bg-muted aria-[current=page]:text-foreground flex flex-row items-center gap-3 rounded-md px-3 py-2" to={link}>
+          <NavLink
+            key={title}
+            className="text-muted-foreground hover:bg-muted aria-[current=page]:bg-muted aria-[current=page]:text-foreground flex flex-row items-center gap-3 rounded-md px-3 py-2"
+            to={link}
+          >
             {icon}
             <p className="text-base font-medium">{title}</p>
           </NavLink>
@@ -22,7 +26,11 @@ export function Sidebar({ className, ...props }: React.ComponentPropsWithoutRef<
       </div>
       <div className="mt-auto flex flex-col gap-1 px-4">
         {bottomItems.map(({ title, icon, link }) => (
-          <NavLink className="text-muted-foreground hover:bg-muted aria-[current=page]:bg-muted aria-[current=page]:text-foreground flex flex-row items-center gap-3 rounded-md px-3 py-2" to={link}>
+          <NavLink
+            key={title}
+            className="text-muted-foreground hover:bg-muted aria-[current=page]:bg-muted aria-[current=page]:text-foreground flex flex-row items-center gap-3 rounded-md px-3 py-2"
+            to={link}
+          >
             {icon}
             <p className="text-base font-medium">{title}</p>
           </NavLink>
