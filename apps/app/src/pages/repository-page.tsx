@@ -3,11 +3,11 @@ import { RepositoryListHeader } from '@/components/repository-list-header';
 
 export function RepositoryPage() {
   return (
-    <>
-      <RepositoryListHeader className="w-full px-6" />
-      <section className="grid w-full grid-cols-3 gap-3 px-6">
+    <div className="mx-auto max-w-7xl px-8 py-4">
+      <RepositoryListHeader className="w-full" />
+      <section className="grid w-full grid-cols-3 gap-3">
         <RepositoryCard />
       </section>
-    </>
+    </div>
   );
 }
