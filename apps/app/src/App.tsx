@@ -4,6 +4,7 @@ import { LoginPage } from '@/pages/login-page';
 import { RegisterPage } from '@/pages/register-page';
 import { RepositoryPage } from '@/pages/repository-page';
 import { BrowserRouter, Route, Routes } from 'react-router';
+import { RepositoryDetailPage } from './pages/repository-detail-page';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<AppLayout />}>
           <Route index element={<DashboardPage />} />
           <Route path="/repository" element={<RepositoryPage />} />
+          <Route path="/repository/:id" element={<RepositoryDetailPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

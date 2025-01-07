@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@repo/ui/components/u
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@repo/ui/components/ui/dropdown-menu';
 import { Separator } from '@repo/ui/components/ui/separator';
 import { Calendar, Clock, Edit, GitCommit, MoreHorizontal, Trash } from 'lucide-react';
+import { Link } from 'react-router';
 import { GitHub } from './icons/github';
 
 const repositoryData = {
@@ -28,22 +29,22 @@ const repositoryData = {
     },
     {
       id: '1',
-      name: 'legacy-api',
-      description: 'Original API repository',
-      createdAt: '2023-12-01',
+      name: 'new-api',
+      description: 'New API repository',
+      createdAt: '2024-12-01',
       provider: 'GitHub'
     },
     {
       id: '4',
-      name: 'old-frontend',
-      description: 'Legacy frontend codebase',
-      createdAt: '2023-11-15',
+      name: 'old-backend',
+      description: 'Legacy backend codebase',
+      createdAt: '2024-11-15',
       provider: 'GitHub'
     }
   ]
 };
 
-export function RepositoryCard() {
+export function RepositoryListCard() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
@@ -127,9 +128,11 @@ export function RepositoryCard() {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <GitCommit className="mr-2 h-4 w-4" />
-              <span>View commits</span>
+            <DropdownMenuItem asChild>
+              <Link to={'id'}>
+                <GitCommit className="mr-2 h-4 w-4" />
+                <span>View commits</span>
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
