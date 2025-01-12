@@ -37,7 +37,7 @@ export function HeroSection() {
                   <div className="bg-primary absolute h-full w-full animate-ping rounded-full"></div>
                   <div className="bg-primary absolute h-full w-full rounded-full"></div>
                 </div>
-                What's new?
+                Coming soon
               </Badge>
               <span className="hidden sm:inline">Automatically sync private commits</span>
               <span className="sm:hidden">Auto-sync commits</span>
@@ -50,8 +50,9 @@ export function HeroSection() {
             transition={{ ...springTransition, delay: 0.3 }}
             className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl xl:text-7xl"
           >
-            Unlock the power of <br />
-            <span className="text-primary">private contributions</span>
+            Own your contributions,
+            <br />
+            even the <span className="text-primary">private ones</span>
           </motion.h1>
           <motion.p
             ref={descriptionRef}
@@ -60,7 +61,9 @@ export function HeroSection() {
             transition={{ ...springTransition, delay: 0.5 }}
             className="text-muted-foreground max-w-2xl text-sm font-normal sm:text-base md:text-lg lg:text-xl"
           >
-            Transfer commit logs from private repositories to your profile
+            Turn private commit logs into a professional portfolio
+            <br />
+            —without compromising privacy.
           </motion.p>
         </div>
         <div className="xs:flex-row flex w-full flex-col gap-3 sm:w-auto">
