@@ -3,7 +3,7 @@ import { Contribu } from '@/components/icons/contribu';
 
 export function RegisterPage() {
   return (
-    <div className="grid min-h-svh">
+    <div className="bg-background grid min-h-svh">
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
           <a href="#" className="flex items-center gap-2 font-medium">
