@@ -36,7 +36,9 @@ export function NavHeader({ className, ...props }: React.ComponentPropsWithoutRe
           ))}
         </div>
         <div className="ml-auto flex flex-row items-center gap-2">
-          <Settings className="text-muted-foreground h-9 w-9 p-2" />
+          <NavLink className="text-muted-foreground hover:bg-muted flex flex-row items-center gap-3 rounded-md text-base font-medium" to={'/settings'}>
+            <Settings className="text-muted-foreground h-9 w-9 p-2" />
+          </NavLink>
           <UserNavigation
             user={{
               name: 'shadcn',
