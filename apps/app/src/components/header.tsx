@@ -1,12 +1,23 @@
 import { Contribu } from '@/components/icons/contribu';
+import { API_ROUTES } from '@/config/api-config';
+import axiosInstance from '@/services/axios-instance';
 import { LogOut } from 'lucide-react';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 
 export function Header({ className, ...props }: React.ComponentPropsWithoutRef<'aside'>) {
+  const navigate = useNavigate();
+
   const navItems = [
     { title: 'Dashboard', link: '/' },
     { title: 'Repositories', link: '/repository' }
   ];
+
+  async function logout() {
+    try {
+      await axiosInstance.post(API_ROUTES.LOGOUT);
+      navigate('/login');
+    } catch {}
+  }
 
   return (
     <header className={`bg-background fixed top-0 h-16 w-full border-b ${className}`} {...props}>
@@ -23,12 +34,12 @@ export function Header({ className, ...props }: React.ComponentPropsWithoutRef<'
             </NavLink>
           ))}
         </div>
-        <NavLink
-          className="text-muted-foreground hover:bg-muted aria-[current=page]:bg-muted aria-[current=page]:text-foreground ml-auto flex flex-row items-center gap-3 rounded-md px-2 py-2 text-base font-medium"
-          to={'/logout'}
+        <div
+          className="text-muted-foreground hover:bg-muted aria-[current=page]:bg-muted aria-[current=page]:text-foreground ml-auto flex cursor-pointer flex-row items-center gap-3 rounded-md px-2 py-2 text-base font-medium"
+          onClick={logout}
         >
           <LogOut className="h-5 w-5" />
-        </NavLink>
+        </div>
       </div>
     </header>
   );

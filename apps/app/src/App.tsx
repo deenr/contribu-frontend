@@ -1,14 +1,17 @@
+import { AuthProvider } from '@/components/providers/auth-provider';
 import { AppLayout } from '@/layouts/app-layout';
 import { DashboardPage } from '@/pages/dashboard-page';
 import { LoginPage } from '@/pages/login-page';
 import { RegisterPage } from '@/pages/register-page';
+import { RepositoryDetailPage } from '@/pages/repository-detail-page';
 import { RepositoryPage } from '@/pages/repository-page';
-import { BrowserRouter, Route, Routes } from 'react-router';
-import { RepositoryDetailPage } from './pages/repository-detail-page';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router';
 
-function App() {
+function Root() {
+  const navigate = useNavigate();
+
   return (
-    <BrowserRouter>
+    <AuthProvider navigateToLogin={() => navigate('/login')}>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
@@ -18,6 +21,14 @@ function App() {
           <Route path="/repository/:id" element={<RepositoryDetailPage />} />
         </Route>
       </Routes>
+    </AuthProvider>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Root />
     </BrowserRouter>
   );
 }
