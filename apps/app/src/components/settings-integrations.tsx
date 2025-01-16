@@ -84,7 +84,7 @@ function Integration({ integration }: { integration: GitProviderStatus }) {
       </CardHeader>
       <CardContent className="flex flex-col gap-1.5 p-0">
         <div className="flex flex-row items-center gap-3">
-          <div className="flex flex-col">
+          <div className="flex flex-col space-y-1">
             <span className="text-muted-foreground text-xs font-medium">Token</span>
 
             <div className="flex flex-row items-center gap-1">
@@ -101,7 +101,7 @@ function Integration({ integration }: { integration: GitProviderStatus }) {
             </div>
           </div>
           {integration.status !== 'not_authorized' && (
-            <div className="flex flex-col">
+            <div className="flex flex-col space-y-1">
               <span className="text-muted-foreground text-xs font-medium">Last synced</span>
               <span className="flex items-center text-sm">{new Date().toLocaleString()}</span>
             </div>
