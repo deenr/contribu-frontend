@@ -2,21 +2,21 @@ import { Tab } from '@/types/tabs';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
-interface TabsProps {
-  tabs: Tab[];
-  activeTab?: Tab;
-  onChange?: (id: string) => void;
+interface TabsProps<T> {
+  tabs: Tab<T>[];
+  activeTab?: Tab<T>;
+  onChange?: (id: T) => void;
 }
 
-export function Tabs({ tabs, activeTab, onChange }: TabsProps) {
-  const [activeTabId, setActiveTabId] = useState<string>(() => (activeTab ? activeTab.id : tabs[0].id));
+export function Tabs<T>({ tabs, activeTab, onChange }: TabsProps<T>) {
+  const [activeTabId, setActiveTabId] = useState<T>(() => (activeTab ? activeTab.id : tabs[0].id));
 
   return (
     <div className="border-b">
       <div className="relative flex flex-row gap-3">
         {tabs.map(({ id, label }) => (
           <button
-            key={id}
+            key={id + ''}
             onClick={() => {
               onChange && onChange(id);
               setActiveTabId(id);

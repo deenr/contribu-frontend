@@ -1,4 +1,4 @@
-export interface Tab {
-  id: string;
+export interface Tab<T> {
+  id: T;
   label: string;
 }

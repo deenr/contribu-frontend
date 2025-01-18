@@ -41,7 +41,7 @@ export function RegisterForm({ className, ...props }: React.ComponentPropsWithou
     setRegisterInProgress(true);
 
     try {
-      const { data } = await axiosInstance.post<{ accessToken: string }>(API_ROUTES.LOGIN, { ...formData });
+      const { data } = await axiosInstance.post<{ accessToken: string }>(API_ROUTES.REGISTER, { ...formData });
 
       setToken(data.accessToken);
 
