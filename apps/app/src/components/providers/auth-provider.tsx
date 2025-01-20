@@ -33,7 +33,7 @@ export function AuthProvider({ children, navigateToLogin }: { children: React.Re
       if (!localStorage.getItem(AUTH_TOKEN)) {
         try {
           const { data } = await axiosInstance.get(API_ROUTES.REFRESH_TOKEN);
-          updateToken(data.token);
+          updateToken(data);
         } catch (error) {
           navigateToLogin();
           updateToken(null);
