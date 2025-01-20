@@ -34,7 +34,7 @@ export function SettingsIntegrations() {
           ? gitProviderStatuses.map((gitProviderStatus) => <Integration key={gitProviderStatus.provider} gitProviderStatus={gitProviderStatus} refreshStatuses={getProviderStatuses} />)
           : Array(3)
               .fill(null)
-              .map((_, index) => <Skeleton key={index} className="h-[140px] w-full" />)}
+              .map((_, index) => <IntegrationSkeleton key={index} />)}
       </div>
     </section>
   );
@@ -144,6 +144,29 @@ function Integration({ gitProviderStatus, refreshStatuses }: { gitProviderStatus
               <span className="flex items-center text-sm">{new Date(gitProviderStatus.syncedAt!).toLocaleString()}</span>
             </div>
           )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+function IntegrationSkeleton() {
+  return (
+    <Card className="flex flex-col gap-6 p-6">
+      <CardHeader className="flex flex-row items-center gap-1.5 space-y-0 p-0">
+        <Skeleton className="h-6 w-6 rounded-full" />
+        <Skeleton className="h-6 w-16" />
+        <Skeleton className="ml-auto h-6 w-10 rounded-full" />
+      </CardHeader>
+      <CardContent className="flex flex-col gap-1.5 p-0">
+        <div className="flex w-2/3 flex-row items-center gap-3">
+          <div className="flex flex-1 flex-col space-y-1">
+            <Skeleton className="h-4 w-2/3" />
+            <Skeleton className="h-5 w-full" />
+          </div>
+          <div className="flex flex-1 flex-col space-y-1">
+            <Skeleton className="h-4 w-2/3" />
+            <Skeleton className="h-5 w-full" />
+          </div>
         </div>
       </CardContent>
     </Card>
