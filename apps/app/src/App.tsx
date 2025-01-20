@@ -1,5 +1,6 @@
 import { AuthProvider } from '@/components/providers/auth-provider';
 import { SettingsIntegrations } from '@/components/settings-integrations';
+import { SettingsProfile } from '@/components/settings-profile';
 import { AppLayout } from '@/layouts/app-layout';
 import { DashboardPage } from '@/pages/dashboard-page';
 import { LoginPage } from '@/pages/login-page';
@@ -24,7 +25,7 @@ function Root() {
           <Route path="/repository" element={<RepositoryPage />} />
           <Route path="/repository/:id" element={<RepositoryDetailPage />} />
           <Route path="/settings" element={<SettingsPage />}>
-            <Route index element={<>Profile</>} />
+            <Route index element={<SettingsProfile />} />
             <Route path="/settings/integrations" element={<SettingsIntegrations />} />
           </Route>
         </Route>

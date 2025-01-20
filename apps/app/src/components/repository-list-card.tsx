@@ -101,8 +101,8 @@ export function RepositoryListCard() {
           </div>
         </div>
       </CardContent>
-      <Separator className="mb-6" />
-      <CardFooter className="flex flex-row gap-3">
+      <Separator />
+      <CardFooter className="flex flex-row gap-3 py-4">
         <Button variant="outline" className="w-full">
           <GitHub />
           View repository
@@ -118,18 +118,18 @@ export function RepositoryListCard() {
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem disabled>
                 <Edit className="mr-2 h-4 w-4" />
                 <span>Edit</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem disabled>
                 <Trash className="mr-2 h-4 w-4" />
                 <span>Delete</span>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link to={'id'}>
+              <Link to={'id'} className="cursor-pointer">
                 <GitCommit className="mr-2 h-4 w-4" />
                 <span>View commits</span>
               </Link>
