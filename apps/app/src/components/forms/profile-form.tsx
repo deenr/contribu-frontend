@@ -44,7 +44,7 @@ export function ProfileForm({ className, ...props }: React.ComponentPropsWithout
 
   useEffect(() => {
     const getProfile = async () => {
-      const { data } = await axiosInstance.get<any>('user/me');
+      const { data } = await axiosInstance.get<{ firstName: string; lastName: string; email: string }>('user/me');
       setProfile(data);
     };
 
@@ -68,13 +68,13 @@ export function ProfileForm({ className, ...props }: React.ComponentPropsWithout
         <Card>
           <CardContent className="pt-6">
             <div className="grid gap-4">
-              <div className="flex items-end gap-4">
+              <div className="flex w-full flex-col items-end gap-4 sm:flex-row">
                 {profile ? (
                   <FormField
                     control={form.control}
                     name="firstName"
                     render={({ field }) => (
-                      <FormItem className="flex-1">
+                      <FormItem className="w-full">
                         <FormLabel>First name</FormLabel>
                         <FormControl>
                           <Input {...field} />
@@ -90,7 +90,7 @@ export function ProfileForm({ className, ...props }: React.ComponentPropsWithout
                     control={form.control}
                     name="lastName"
                     render={({ field }) => (
-                      <FormItem className="flex-1">
+                      <FormItem className="w-full">
                         <FormLabel>Last name</FormLabel>
                         <FormControl>
                           <Input {...field} />

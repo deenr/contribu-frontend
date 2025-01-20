@@ -8,7 +8,7 @@ export function SettingsProfile() {
         <p className="text-muted-foreground text-sm font-normal">Manage your profile here</p>
       </div>
 
-      <div className="w-2/3">
+      <div className="w-full md:w-2/3">
         <ProfileForm className="w-full" />
       </div>
     </section>
