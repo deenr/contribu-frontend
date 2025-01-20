@@ -1,17 +1,32 @@
 import { Contribu } from '@/components/icons/contribu';
 import { API_ROUTES } from '@/config/api-config';
 import axiosInstance from '@/services/axios-instance';
+import { Skeleton } from '@repo/ui/components/ui/skeleton';
 import { Settings } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router';
 import { UserNavigation } from './nav-user';
 
 export function NavHeader({ className, ...props }: React.ComponentPropsWithoutRef<'aside'>) {
   const navigate = useNavigate();
+  const [profile, setProfile] = useState<{
+    name: string;
+    email: string;
+  } | null>(null);
 
   const navItems = [
     { title: 'Dashboard', link: '/' },
     { title: 'Repositories', link: '/repository' }
   ];
+
+  useEffect(() => {
+    const getProfile = async () => {
+      const { data } = await axiosInstance.get<{ firstName: string; lastName: string; email: string }>('user/me');
+      setProfile({ name: `${data.firstName} ${data.lastName}`, email: data.email });
+    };
+
+    getProfile();
+  }, []);
 
   async function logout() {
     try {
@@ -39,14 +54,17 @@ export function NavHeader({ className, ...props }: React.ComponentPropsWithoutRe
           <NavLink className="text-muted-foreground hover:bg-muted flex flex-row items-center gap-3 rounded-md text-base font-medium" to={'/settings'}>
             <Settings className="text-muted-foreground h-9 w-9 p-2" />
           </NavLink>
-          <UserNavigation
-            user={{
-              name: 'shadcn',
-              email: 'm@example.com',
-              avatar: '/avatars/shadcn.jpg'
-            }}
-            logout={logout}
-          />
+          {profile ? (
+            <UserNavigation
+              user={{
+                avatar: '',
+                ...profile
+              }}
+              logout={logout}
+            />
+          ) : (
+            <Skeleton className="size-9 rounded-full" />
+          )}
         </div>
       </div>
     </header>

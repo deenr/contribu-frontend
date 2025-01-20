@@ -4,12 +4,18 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { LogOut, User } from 'lucide-react';
 
 export function UserNavigation({ user, logout }: { user: NavUser; logout: () => Promise<void> }) {
+  const initials = user.name
+    .split(' ')
+    .slice(0, 2)
+    .map((name) => name[0])
+    .join('');
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="h-9 w-9 cursor-pointer rounded-full">
           <AvatarImage src={user.avatar} alt={user.name} />
-          <AvatarFallback className="bg-primary text-primary-foreground rounded-lg">CN</AvatarFallback>
+          <AvatarFallback className="bg-primary text-primary-foreground rounded-lg">{initials}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="min-w-56 rounded-lg" side="bottom" align="end" sideOffset={4}>
@@ -17,7 +23,7 @@ export function UserNavigation({ user, logout }: { user: NavUser; logout: () => 
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
             <Avatar className="h-8 w-8 rounded-lg">
               <AvatarImage src={user.avatar} alt={user.name} />
-              <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+              <AvatarFallback className="rounded-lg">{initials}</AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-semibold">{user.name}</span>
