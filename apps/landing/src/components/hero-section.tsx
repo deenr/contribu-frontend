@@ -73,7 +73,7 @@ export function HeroSection() {
             </Button>
           </motion.div>
           <motion.div ref={getStartedButtonRef} initial={{ opacity: 0, y: 20 }} animate={isGetStartedButtonRefInView ? { opacity: 1, y: 0 } : {}} transition={{ ...springTransition, delay: 0.9 }}>
-            <a href="https://app.contribu.me/signup">
+            <a href="https://app.contribu.me/register">
               <Button className="w-full rounded-full sm:w-auto">
                 Get Started
                 <ArrowRight />

@@ -46,12 +46,12 @@ export function Header() {
           <Contribu className="text-primary h-5 min-h-5 w-28 min-w-28 text-xl" />
 
           <div className="flex flex-row gap-3">
-            <a className="xs:block hidden" href="https://app.contribu.me/signin">
+            <a className="xs:block hidden" href="https://app.contribu.me/login">
               <Button variant="outline" className="rounded-full">
                 Sign in
               </Button>
             </a>
-            <a href="https://app.contribu.me/signup">
+            <a href="https://app.contribu.me/register">
               <Button className="rounded-full">Get started</Button>
             </a>
           </div>
