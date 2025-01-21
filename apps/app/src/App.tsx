@@ -1,14 +1,14 @@
-import { AuthProvider } from '@/components/providers/auth-provider';
-import { SettingsIntegrations } from '@/components/settings-integrations';
-import { SettingsProfile } from '@/components/settings-profile';
-import { AppLayout } from '@/layouts/app-layout';
-import { DashboardPage } from '@/pages/dashboard-page';
-import { LoginPage } from '@/pages/login-page';
-import { ProviderLoadingPage } from '@/pages/provider-loading-page';
-import { RegisterPage } from '@/pages/register-page';
-import { RepositoryDetailPage } from '@/pages/repository-detail-page';
-import { RepositoryPage } from '@/pages/repository-page';
-import { SettingsPage } from '@/pages/settings-page';
+import { AuthProvider } from '@/components/features/auth/auth-provider';
+import { SettingsIntegrations } from '@/components/features/settings/settings-integrations';
+import { SettingsProfile } from '@/components/features/settings/settings-profile';
+import { AppLayout } from '@/components/layout/app-layout';
+import { DashboardPage } from '@/components/routes/dashboard-page';
+import { LoginPage } from '@/components/routes/login-page';
+import { ProviderLoadingPage } from '@/components/routes/provider-loading-page';
+import { RegisterPage } from '@/components/routes/register-page';
+import { RepositoryDetailPage } from '@/components/routes/repository-detail-page';
+import { RepositoryPage } from '@/components/routes/repository-page';
+import { SettingsPage } from '@/components/routes/settings-page';
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router';
 
 function Root() {
