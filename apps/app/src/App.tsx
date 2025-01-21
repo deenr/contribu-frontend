@@ -9,16 +9,24 @@ import { RegisterPage } from '@/components/routes/register-page';
 import { RepositoryDetailPage } from '@/components/routes/repository-detail-page';
 import { RepositoryPage } from '@/components/routes/repository-page';
 import { SettingsPage } from '@/components/routes/settings-page';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router';
+import { BrowserRouter, Outlet, Route, Routes, useNavigate } from 'react-router';
 
 function Root() {
   const navigate = useNavigate();
 
   return (
-    <AuthProvider navigateToLogin={() => navigate('/login')}>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+
+      <Route
+        path="/"
+        element={
+          <AuthProvider navigateToLogin={() => navigate('/login')}>
+            <Outlet />
+          </AuthProvider>
+        }
+      >
         <Route path="/oauth" element={<ProviderLoadingPage />} />
         <Route path="/" element={<AppLayout />}>
           <Route index element={<DashboardPage />} />
@@ -29,8 +37,8 @@ function Root() {
             <Route path="/settings/integrations" element={<SettingsIntegrations />} />
           </Route>
         </Route>
-      </Routes>
-    </AuthProvider>
+      </Route>
+    </Routes>
   );
 }
 

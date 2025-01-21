@@ -1,9 +1,11 @@
+import { AUTH_TOKEN } from '@/components/features/auth/auth-provider';
 import { API_ROUTES } from '@/config/api-config';
 import axiosInstance from '@/services/axios-instance';
 import { AxiosResponse } from 'axios';
 
 export const authAPI = {
   logout(): Promise<AxiosResponse<any, any>> {
+    localStorage.removeItem(AUTH_TOKEN);
     return axiosInstance.post(API_ROUTES.AUTH.LOGOUT);
   },
 

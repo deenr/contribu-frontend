@@ -2,7 +2,7 @@ import { authAPI } from '@/actions/auth-actions';
 import axiosInstance from '@/services/axios-instance';
 import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 
-const AUTH_TOKEN = 'contribu.auth-token';
+export const AUTH_TOKEN = 'contribu.auth-token';
 
 type AuthProviderState = {
   token: string | null;
@@ -23,7 +23,7 @@ export function AuthProvider({ children, navigateToLogin }: { children: React.Re
     if (newToken) {
       localStorage.setItem(AUTH_TOKEN, newToken);
     } else {
-      localStorage.removeItem(AUTH_TOKEN);
+      AUTH_TOKEN;
     }
     setToken(newToken);
   };
