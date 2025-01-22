@@ -96,12 +96,12 @@ export function RepositorySelects({ form, repos, branches, contributors, isLoadi
           name="branch"
           render={({ field }) => (
             <FormItem>
-              <Select value={field.value} onValueChange={field.onChange} disabled={!selectedPlatform || isLoadingRepos}>
+              <Select value={field.value} onValueChange={field.onChange} disabled={!selectedRepo || isLoadingBranches}>
                 <FormControl>
                   <SelectTrigger aria-label="Select branch" disabled={branches.length === 0}>
                     <div className="flex flex-row items-center gap-2">
-                      {isLoadingRepos && <Loader2 className="size-4 animate-spin" />}
-                      <SelectValue placeholder={isLoadingRepos ? 'Loading branches...' : 'Select a branch'} />
+                      {isLoadingBranches && <Loader2 className="size-4 animate-spin" />}
+                      <SelectValue placeholder={isLoadingBranches ? 'Loading branches...' : 'Select a branch'} />
                     </div>
                   </SelectTrigger>
                 </FormControl>
