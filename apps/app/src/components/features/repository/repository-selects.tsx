@@ -9,13 +9,15 @@ import { UseFormReturn } from 'react-hook-form';
 type RepositorySelectsProps = {
   form: UseFormReturn<GitRepositoryInfo>;
   repos: GitRepository[];
+  branches: string[];
   contributors: GitContributor[];
   isLoadingRepos: boolean;
+  isLoadingBranches: boolean;
   isLoadingContributors: boolean;
   onSubmit: (data: GitRepositoryInfo) => void;
 };
 
-export function RepositorySelects({ form, repos, contributors, isLoadingRepos, isLoadingContributors, onSubmit }: RepositorySelectsProps) {
+export function RepositorySelects({ form, repos, branches, contributors, isLoadingRepos, isLoadingBranches, isLoadingContributors, onSubmit }: RepositorySelectsProps) {
   const { control, handleSubmit, watch } = form;
   const selectedPlatform = watch('platform');
   const selectedRepo = watch('repository');
@@ -81,6 +83,33 @@ export function RepositorySelects({ form, repos, contributors, isLoadingRepos, i
                     {repos.map((repo) => (
                       <SelectItem key={repo.id} value={repo.id}>
                         {repo.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="branch"
+          render={({ field }) => (
+            <FormItem>
+              <Select value={field.value} onValueChange={field.onChange} disabled={!selectedPlatform || isLoadingRepos}>
+                <FormControl>
+                  <SelectTrigger aria-label="Select branch" disabled={branches.length === 0}>
+                    <div className="flex flex-row items-center gap-2">
+                      {isLoadingRepos && <Loader2 className="size-4 animate-spin" />}
+                      <SelectValue placeholder={isLoadingRepos ? 'Loading branches...' : 'Select a branch'} />
+                    </div>
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectGroup>
+                    {branches.map((branch) => (
+                      <SelectItem key={branch} value={branch}>
+                        {branch}
                       </SelectItem>
                     ))}
                   </SelectGroup>

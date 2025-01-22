@@ -13,8 +13,10 @@ type SelectReposStepProps = {
 
 export function SelectReposStep({ repositories, onSubmitRepositories }: SelectReposStepProps) {
   const [repos, setRepos] = useState<GitRepository[]>([]);
+  const [branches, setBranches] = useState<string[]>([]);
   const [contributors, setContributors] = useState<GitContributor[]>([]);
   const [isLoadingRepos, setIsLoadingRepos] = useState(false);
+  const [isLoadingBranches, setIsLoadingBranches] = useState(false);
   const [isLoadingContributors, setIsLoadingContributors] = useState(false);
 
   const form = useForm<GitRepositoryInfo>({
@@ -37,11 +39,17 @@ export function SelectReposStep({ repositories, onSubmitRepositories }: SelectRe
       }
 
       if (name === 'repository' && value.repository && value.platform) {
+        setIsLoadingBranches(true);
         setIsLoadingContributors(true);
+
         try {
-          const { data } = await axiosInstance.get<GitContributor[]>(`provider/${value.platform}/${value.repository.name}/contributors`);
-          setContributors(data);
+          const branchesResponse = await axiosInstance.get<string[]>(`provider/${value.platform}/${value.repository.name}/branches`);
+          setBranches(branchesResponse.data);
+
+          const contributorsResponse = await axiosInstance.get<GitContributor[]>(`provider/${value.platform}/${value.repository.name}/contributors`);
+          setContributors(contributorsResponse.data);
         } finally {
+          setIsLoadingBranches(false);
           setIsLoadingContributors(false);
         }
       }
@@ -54,6 +62,7 @@ export function SelectReposStep({ repositories, onSubmitRepositories }: SelectRe
     onSubmitRepositories([...repositories, data]);
     reset();
     setContributors([]);
+    setBranches([]);
   }
 
   function removeRepo(index: number) {
@@ -62,7 +71,16 @@ export function SelectReposStep({ repositories, onSubmitRepositories }: SelectRe
 
   return (
     <>
-      <RepositorySelects form={form} repos={repos} contributors={contributors} isLoadingRepos={isLoadingRepos} isLoadingContributors={isLoadingContributors} onSubmit={onSubmit} />
+      <RepositorySelects
+        form={form}
+        repos={repos}
+        branches={branches}
+        contributors={contributors}
+        isLoadingRepos={isLoadingRepos}
+        isLoadingBranches={isLoadingBranches}
+        isLoadingContributors={isLoadingContributors}
+        onSubmit={onSubmit}
+      />
       <RepositoryList repositories={repositories} onRemove={removeRepo} />
     </>
   );

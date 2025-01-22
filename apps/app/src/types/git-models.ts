@@ -29,6 +29,7 @@ export const GitRepositoryInfoSchema = z.object({
     id: z.string(),
     name: z.string()
   }),
+  branch: z.string(),
   contributor: z.object({
     id: z.string(),
     name: z.string()
