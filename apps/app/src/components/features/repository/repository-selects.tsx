@@ -1,5 +1,5 @@
 import { PLATFORM_ICONS } from '@/constants/platform-icons';
-import { GitContributor, GitRepository, GitRepositoryInfo } from '@/types/git-models';
+import { GitRepositoryInfo } from '@/types/git-models';
 import { Button } from '@repo/ui/components/ui/button';
 import { Form, FormControl, FormField, FormItem } from '@repo/ui/components/ui/form';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/components/ui/select';
@@ -8,9 +8,9 @@ import { UseFormReturn } from 'react-hook-form';
 
 type RepositorySelectsProps = {
   form: UseFormReturn<GitRepositoryInfo>;
-  repos: GitRepository[];
+  repos: string[];
   branches: string[];
-  contributors: GitContributor[];
+  contributors: string[];
   isLoadingRepos: boolean;
   isLoadingBranches: boolean;
   isLoadingContributors: boolean;
@@ -57,32 +57,20 @@ export function RepositorySelects({ form, repos, branches, contributors, isLoadi
           name="repository"
           render={({ field }) => (
             <FormItem>
-              <Select
-                value={field.value?.id || ''}
-                onValueChange={(selectedId) => {
-                  const selectedRepo = repos.find((repo) => repo.id === selectedId);
-                  if (selectedRepo) {
-                    field.onChange({
-                      id: selectedRepo.id.toString(),
-                      name: selectedRepo.name
-                    });
-                  }
-                }}
-                disabled={!selectedPlatform || isLoadingRepos}
-              >
+              <Select value={field.value} onValueChange={field.onChange} disabled={!selectedPlatform || isLoadingRepos}>
                 <FormControl>
                   <SelectTrigger aria-label="Select repository" disabled={repos.length === 0}>
                     <div className="flex flex-row items-center gap-2">
                       {isLoadingRepos && <Loader2 className="size-4 animate-spin" />}
-                      <SelectValue placeholder={isLoadingRepos ? 'Loading repositories...' : 'Select a repository'}>{field.value?.name}</SelectValue>
+                      <SelectValue placeholder={isLoadingRepos ? 'Loading repositories...' : 'Select a repository'} />
                     </div>
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
                   <SelectGroup>
                     {repos.map((repo) => (
-                      <SelectItem key={repo.id} value={repo.id}>
-                        {repo.name}
+                      <SelectItem key={repo} value={repo}>
+                        {repo}
                       </SelectItem>
                     ))}
                   </SelectGroup>
@@ -123,32 +111,20 @@ export function RepositorySelects({ form, repos, branches, contributors, isLoadi
           name="contributor"
           render={({ field }) => (
             <FormItem>
-              <Select
-                value={field.value?.id || ''}
-                onValueChange={(selectedId) => {
-                  const selectedContributor = contributors.find((contributor) => contributor.id === selectedId);
-                  if (selectedContributor) {
-                    field.onChange({
-                      id: selectedContributor.id.toString(),
-                      name: selectedContributor.login
-                    });
-                  }
-                }}
-                disabled={!selectedPlatform || isLoadingContributors}
-              >
+              <Select value={field.value} onValueChange={field.onChange} disabled={!selectedPlatform || isLoadingContributors}>
                 <FormControl>
                   <SelectTrigger aria-label="Select contributor" disabled={contributors.length === 0}>
                     <div className="flex flex-row items-center gap-2">
                       {isLoadingContributors && <Loader2 className="size-4 animate-spin" />}
-                      <SelectValue placeholder={isLoadingContributors ? 'Loading contributors...' : 'Select an contributor'}>{field.value?.name}</SelectValue>
+                      <SelectValue placeholder={isLoadingContributors ? 'Loading contributors...' : 'Select an contributor'} />
                     </div>
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
                   <SelectGroup>
                     {contributors.map((contributor) => (
-                      <SelectItem key={contributor.id} value={contributor.id}>
-                        {contributor.login}
+                      <SelectItem key={contributor} value={contributor}>
+                        {contributor}
                       </SelectItem>
                     ))}
                   </SelectGroup>

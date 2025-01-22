@@ -1,7 +1,7 @@
 import { RepositoryList } from '@/components/features/repository/repository-list';
 import { RepositorySelects } from '@/components/features/repository/repository-selects';
 import axiosInstance from '@/services/axios-instance';
-import { GitContributor, GitRepository, GitRepositoryInfo, GitRepositoryInfoSchema } from '@/types/git-models';
+import { GitRepositoryInfo, GitRepositoryInfoSchema } from '@/types/git-models';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -12,9 +12,9 @@ type SelectReposStepProps = {
 };
 
 export function SelectReposStep({ repositories, onSubmitRepositories }: SelectReposStepProps) {
-  const [repos, setRepos] = useState<GitRepository[]>([]);
+  const [repos, setRepos] = useState<string[]>([]);
   const [branches, setBranches] = useState<string[]>([]);
-  const [contributors, setContributors] = useState<GitContributor[]>([]);
+  const [contributors, setContributors] = useState<string[]>([]);
   const [isLoadingRepos, setIsLoadingRepos] = useState(false);
   const [isLoadingBranches, setIsLoadingBranches] = useState(false);
   const [isLoadingContributors, setIsLoadingContributors] = useState(false);
@@ -31,7 +31,7 @@ export function SelectReposStep({ repositories, onSubmitRepositories }: SelectRe
       if (name === 'platform' && value.platform) {
         setIsLoadingRepos(true);
         try {
-          const { data } = await axiosInstance.get<GitRepository[]>(`provider/${value.platform}/repositories`);
+          const { data } = await axiosInstance.get<string[]>(`provider/${value.platform}/repositories`);
           setRepos(data);
         } finally {
           setIsLoadingRepos(false);
@@ -43,10 +43,10 @@ export function SelectReposStep({ repositories, onSubmitRepositories }: SelectRe
         setIsLoadingContributors(true);
 
         try {
-          const branchesResponse = await axiosInstance.get<string[]>(`provider/${value.platform}/${value.repository.name}/branches`);
+          const branchesResponse = await axiosInstance.get<string[]>(`provider/${value.platform}/${value.repository}/branches`);
           setBranches(branchesResponse.data);
 
-          const contributorsResponse = await axiosInstance.get<GitContributor[]>(`provider/${value.platform}/${value.repository.name}/contributors`);
+          const contributorsResponse = await axiosInstance.get<string[]>(`provider/${value.platform}/${value.repository}/contributors`);
           setContributors(contributorsResponse.data);
         } finally {
           setIsLoadingBranches(false);
@@ -58,7 +58,8 @@ export function SelectReposStep({ repositories, onSubmitRepositories }: SelectRe
     return () => subscription.unsubscribe();
   }, [watch]);
 
-  function onSubmit(data: GitRepositoryInfo) {
+  async function onSubmit(data: GitRepositoryInfo) {
+    await axiosInstance.get(`/provider/${data.platform.toLowerCase()}/${data.repository}/${data.branch}/${data.contributor}/commits`);
     onSubmitRepositories([...repositories, data]);
     reset();
     setContributors([]);

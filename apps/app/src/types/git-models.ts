@@ -6,16 +6,6 @@ export enum GitPlatform {
   BITBUCKET = 'BITBUCKET'
 }
 
-export type GitRepository = {
-  id: string;
-  name: string;
-};
-
-export type GitContributor = {
-  id: string;
-  login: string;
-};
-
 export type GitIntegrationStatus = {
   provider: GitPlatform;
   authorized: boolean;
@@ -25,15 +15,9 @@ export type GitIntegrationStatus = {
 
 export const GitRepositoryInfoSchema = z.object({
   platform: z.enum([GitPlatform.GITHUB, GitPlatform.GITLAB, GitPlatform.BITBUCKET]),
-  repository: z.object({
-    id: z.string(),
-    name: z.string()
-  }),
+  repository: z.string(),
   branch: z.string(),
-  contributor: z.object({
-    id: z.string(),
-    name: z.string()
-  })
+  contributor: z.string()
 });
 
 export type GitRepositoryInfo = z.infer<typeof GitRepositoryInfoSchema>;
